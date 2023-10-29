@@ -14,14 +14,14 @@ gpt_get_completions <- function(prompt, openai_api_key = Sys.getenv("OPENAI_API_
   }
   # See https://platform.openai.com/docs/api-reference/chat .
   params <- list(
-    model = Sys.getenv("OPENAI_MODEL", "gpt-3.5-turbo"),
+    model = Sys.getenv("OPENAI_MODEL", "gpt-4"),
     max_tokens = as.numeric(Sys.getenv("OPENAI_MAX_TOKENS", 256)),
     temperature = as.numeric(Sys.getenv("OPENAI_TEMPERATURE", 1)),
     top_p = as.numeric(Sys.getenv("OPENAI_TOP_P", 1)),
     frequency_penalty = as.numeric(Sys.getenv("OPENAI_FREQUENCY_PENALTY", 0)),
     presence_penalty = as.numeric(Sys.getenv("OPENAI_PRESENCE_PENALTY", 0))
   )
-  if (as.logical(Sys.getenv("OPENAI_VERBOSE", TRUE))) {
+  if (as.logical(Sys.getenv("OPENAI_VERBOSE", FALSE))) {
     message(paste0("\n*** ChatGPT input:\n\n", prompt, "\n"))
   }
   return_language <- Sys.getenv("OPENAI_RETURN_LANGUAGE")
