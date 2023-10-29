@@ -65,8 +65,9 @@ gpt_get_completions <- function(prompt, openai_api_key = Sys.getenv("OPENAI_API_
       "https://api.openai.com/v1/chat/completions",
       add_headers("Authorization" = paste("Bearer", openai_api_key)),
       content_type_json(),
-      body = toJSON(c(params, list(messages = messages)), auto_unbox = TRUE),
-      proxy
+      body = toJSON(c(params, list(messages = messages),model="gpt-4"), auto_unbox = TRUE),
+      proxy,
+      timeout(500)
     )
     if (!post_res$status_code %in% 200:299) {
       stop(content(post_res))
